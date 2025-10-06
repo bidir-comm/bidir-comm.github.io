@@ -25,6 +25,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <style>
+        .features {
+            list-style-type: disc;  /* solid round bullets */
+            margin-left: 1.5em;     /* indent to taste */
+        }
+
+        .lead-video-player-wrapper {
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #363636;
+            position: relative;
+            margin: 0 auto 1rem;
+            display: block;
+            width: 80%;
+            aspect-ratio: 16 / 9;
+        }
+      
+        .lead-video-player-wrapper video {
+            display: block;
+            width: 100%;  
+            height: auto; 
+        }
+      
+        .video-thumbnail-strip {
+            display: flex;            
+            flex-direction: column; 
+            flex-wrap: nowrap;        
+            gap: 10px;               
+            justify-content: flex-start; 
+            align-items: center;
+        }
+      
+        .video-thumbnail-strip .thumbnail-video-wrapper {
+            position: relative;
+            width: 12vw;
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: border-color 0.2s ease-in-out,
+                        transform    0.2s ease-in-out;
+            background-color: #2b2b2b;
+        }
+      
+        .video-thumbnail-strip .thumbnail-video-wrapper video.thumbnail-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            display: block;
+        }
+      
+        .video-thumbnail-strip .thumbnail-video-wrapper:hover {
+            border-color: #EDF7F1;
+            transform: scale(1.05);
+        }
+      
+        .video-thumbnail-strip .thumbnail-video-wrapper.active {
+            border-color: #297270;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 
 <body>
@@ -91,5 +154,66 @@
             </div>
         </div>
     </section>
+
+    <section class="section">
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered">
+                    <div class="row is-full-width">
+                        <h2 class="title is-3"><span class="dvima">Example Interactions</span></h2>
+                        <div class="columns is-vcentered">
+                            <div class="column is-narrow">
+                                <div class="video-thumbnail-strip" id="all-thumbs">
+                                    <div class="thumbnail-video-wrapper" data-video-src="videos/scratching-1.mp4">
+                                        <video class="thumbnail-video" src="videos/scratching-1.mp4" poster="images/scratching-1.jpg" muted preload="metadata" playsinline></video>
+                                    </div>
+                                    <div class="thumbnail-video-wrapper" data-video-src="videos/feeding-1.mp4">
+                                        <video class="thumbnail-video" src="videos/feeding-1.mp4" poster="images/feeding-1.jpg" muted preload="metadata" playsinline></video>
+                                    </div>
+                                    <div class="thumbnail-video-wrapper" data-video-src="videos/bathing-1.mp4">
+                                        <video class="thumbnail-video" src="videos/bathing-1.mp4" poster="images/bathing-1.jpg" muted preload="metadata" playsinline></video>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="lead-video-player-wrapper">
+                                    <video id="scratching-lead-video" src="videos/scratching-1.mp4" controls preload="auto"></video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<script>
+    function setupVideoGallery(galleryId, leadVideoId) {
+        const gallery = document.getElementById(galleryId);
+        if (!gallery) { /* console.warn("Gallery not found:", galleryId); */ return; }
+        const leadVideo = document.getElementById(leadVideoId);
+        if (!leadVideo) { /* console.warn("Lead video not found:", leadVideoId); */ return; }
+        
+        const thumbnailWrappers = gallery.querySelectorAll('.thumbnail-video-wrapper'); 
+        if (thumbnailWrappers.length === 0) { /* console.warn("No thumbnails in gallery:", galleryId); */ return; }
+
+        if (thumbnailWrappers[0] && thumbnailWrappers[0].dataset.videoSrc) {
+            leadVideo.src = thumbnailWrappers[0].dataset.videoSrc;
+            thumbnailWrappers[0].classList.add('active');
+        }
+
+        thumbnailWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', function() {
+                leadVideo.src = this.dataset.videoSrc;
+                thumbnailWrappers.forEach(thumbWrap => thumbWrap.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    }
+
+    setupVideoGallery('all-thumbs', 'scratching-lead-video');
+
+</script>
 
 </html>
