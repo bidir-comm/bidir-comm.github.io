@@ -131,17 +131,16 @@
         </div>
     </section>
 
-    <section class="section" style="padding: 0">
+    <!-- <section class="section" style="padding: 0">
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <img src="images/teaser.png" alt="main figure" style="width:100%; height:auto;">
             </div>
         </div>
-    </section>
+    </section> -->
 
-    <section class="section">
+    <!-- <section class="section">
         <div class="container is-max-desktop">
-            <!-- Abstract. -->
             <div class="columns is-centered has-text-centered">
                 <div class="column">
                     <h2 class="title is-3">Abstract</h2>
@@ -153,17 +152,17 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="section">
         <div class="container is-max-widescreen">
             <div class="rows">
                 <div class="rows is-centered">
                     <div class="row is-full-width">
-                        <h2 class="title is-3"><span class="dvima">Example Interactions</span></h2>
+                        <h2 class="title is-3"><span class="dvima">Example Full Interactions</span></h2>
                         <div class="columns is-vcentered">
                             <div class="column is-narrow">
-                                <div class="video-thumbnail-strip" id="all-thumbs">
+                                <div class="video-thumbnail-strip" id="full-thumbs">
                                     <div class="thumbnail-video-wrapper" data-video-src="videos/scratching-1.mp4">
                                         <video class="thumbnail-video" src="videos/scratching-1.mp4" poster="images/scratching-1.jpg" muted preload="metadata" playsinline></video>
                                     </div>
@@ -178,6 +177,26 @@
                             <div class="column">
                                 <div class="lead-video-player-wrapper">
                                     <video id="scratching-lead-video" src="videos/scratching-1.mp4" controls preload="auto"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <h2 class="title is-3"><span class="dvima">Example Clips of Clarifying Questions</span></h2>
+                        <div class="columns is-vcentered">
+                            <div class="column is-narrow">
+                                <div class="video-thumbnail-strip" id="clarify-thumbs">
+                                    <div class="thumbnail-video-wrapper" data-video-src="videos/clarification-1.mp4">
+                                        <video class="thumbnail-video" src="videos/clarification-1.mp4" poster="images/clarification-1.jpg" muted preload="metadata" playsinline></video>
+                                    </div>
+                                    <div class="thumbnail-video-wrapper" data-video-src="videos/clarification-2.mp4">
+                                        <video class="thumbnail-video" src="videos/clarification-2.mp4" poster="images/clarification-2.jpg" muted preload="metadata" playsinline></video>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="lead-video-player-wrapper">
+                                    <video id="clarification-lead-video" src="videos/clarification-1.mp4" controls preload="auto"></video>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +231,8 @@
         });
     }
 
-    setupVideoGallery('all-thumbs', 'scratching-lead-video');
+    setupVideoGallery('full-thumbs', 'scratching-lead-video');
+    setupVideoGallery('clarify-thumbs', 'clarification-lead-video');
 
 </script>
 
